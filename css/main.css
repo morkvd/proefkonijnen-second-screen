@@ -20,6 +20,24 @@ html, body, main {
   background-color: #e7fff9;
 }
 
+.top-bar {
+  width: 100%;
+  background-color: #e65098;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.top-bar-text {
+  display: inline-block;
+  margin: 0 0 0 1em;
+}
+
+.back-button {
+  background-color: white;
+  border: 3px black solid;
+  color: black;
+}
+
 .main-menu-button {
   display: block;
   width: 15em;

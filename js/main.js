@@ -4,17 +4,16 @@ const emitNavigationEvent = function (location) {
   this.$emit('navigate', location);
 };
 
-
 const VM = new Vue({
   el: '#proefkonijnen',
-  data: {
-    currentView: 'home',
+  data: function () {
+    return { currentView: 'home' };
   },
 
   methods: {
     changeView: function (newView) {
       this.currentView = newView;
-    }
+    },
   },
 
   components: {
@@ -22,28 +21,32 @@ const VM = new Vue({
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#main_menu_template'
+      template: '#main_menu_template',
     },
 
     live: {
+      data: {
+        index: 0,
+        questions: [],
+      },
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#live_template'
+      template: '#live_template',
     },
 
     diy: {
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#diy_template'
+      template: '#diy_template',
     },
 
     questions: {
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#questions_template'
-    }
+      template: '#questions_template',
+    },
   }
 });
