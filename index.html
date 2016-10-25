@@ -7,19 +7,38 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
 </head>
 <body>
+
+  <script type="text/x-template" id="main_menu_template">
+    <section class="main-menu-container">
+      <button v-on:click="navigate('live')" class="main-menu-button">Speel live mee</button>
+      <button v-on:click="navigate('diy')" class="main-menu-button">Doe het lekker zelf</button>
+      <button v-on:click="navigate('questions')" class="main-menu-button">Bezopen vragen</button>
+    </section>
+  </script>
+
+  <script type="text/x-template" id="live_template">
+    <section class="live-container">
+      <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
+      <h1>Speel live mee</h1>
+    </section>
+  </script>
+
+  <script type="text/x-template" id="diy_template">
+    <section class="diy-container">
+      <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
+      <h1>Doe het lekker zelf</h1>
+    </section>
+  </script>
+
+  <script type="text/x-template" id="questions_template">
+    <section class="questions-container">
+      <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
+      <h1>Bezopen vragen</h1>
+    </section>
+  </script>
+
   <main id="proefkonijnen">
-
-    <div id="toReplace">
-      <div :is="currentComponent"></div>
-      <div v-show="!currentComponent" v-for="component in componentsArray">
-        <button @click="swapComponent(component)" class="main-menu-button">{{ component }}</button>
-      </div>
-    </div>
-
-    <div v-show="currentComponent">
-      <button @click="swapComponent(null)" class="main-menu-button">Close</button>
-    </div>
-
+    <component v-on:navigate="changeView" v-bind:is="currentView"></component>
   </main>
 </body>
 <script src="js/vue.js" charset="utf-8"></script>
