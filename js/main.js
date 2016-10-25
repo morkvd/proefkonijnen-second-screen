@@ -1,3 +1,5 @@
+// custom navigation event
+// `location` must be the name of one of VM's child components
 const emitNavigationEvent = function (location) {
   this.$emit('navigate', location);
 };

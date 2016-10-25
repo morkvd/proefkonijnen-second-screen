@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <!-- main menu component html template -->
   <script type="text/x-template" id="main_menu_template">
     <section class="main-menu-container">
       <button v-on:click="navigate('live')" class="main-menu-button">Speel live mee</button>
@@ -16,6 +17,7 @@
     </section>
   </script>
 
+  <!-- live play component html template -->
   <script type="text/x-template" id="live_template">
     <section class="live-container">
       <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
@@ -23,6 +25,7 @@
     </section>
   </script>
 
+  <!-- do it yourself component html template -->
   <script type="text/x-template" id="diy_template">
     <section class="diy-container">
       <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
@@ -30,6 +33,7 @@
     </section>
   </script>
 
+  <!-- questions component html template -->
   <script type="text/x-template" id="questions_template">
     <section class="questions-container">
       <button v-on:click="navigate('home')" class="main-menu-button">Terug</button>
@@ -37,6 +41,7 @@
     </section>
   </script>
 
+  <!-- vue mountpoint changes the view when recieving 'navigate' events -->
   <main id="proefkonijnen">
     <component v-on:navigate="changeView" v-bind:is="currentView"></component>
   </main>
