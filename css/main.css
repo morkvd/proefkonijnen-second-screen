@@ -1,0 +1,43 @@
+html, body, main {
+  font-family: 'Roboto Slab', serif;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: 0;
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: #e7fff9;
+}
+
+.main-menu-button {
+  display: block;
+  width: 15em;
+  padding: 0.8em;
+  margin: 0 auto 2em;
+
+  font-family: 'Roboto Slab', serif;
+  font-size: 20px;
+  font-weight: bold;
+
+  border: 3px black solid;
+  background-color: #00FF6F;
+  color: black;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
