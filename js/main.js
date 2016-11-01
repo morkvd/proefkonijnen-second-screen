@@ -1,10 +1,10 @@
 // custom navigation event
 // `location` must be the name of one of VM's child components
-const emitNavigationEvent = function (location) {
+var emitNavigationEvent = function (location) {
   this.$emit('navigate', location);
 };
 
-const VM = new Vue({
+var VM = new Vue({
   el: '#proefkonijnen',
   data: function () {
     return {
@@ -54,7 +54,7 @@ const VM = new Vue({
               ]
             },
             {
-              question: 'Waarom duurde het 300 jaar voordat de reuze schildpad zijn wetenschappelijke naam kreeg?',
+              question: 'Waarom duurde het 300 jaar voordat de reuzeschildpad zijn wetenschappelijke naam kreeg?',
               correctAnswer: 0,
               answers: [
                 'A: Hij smaakte te lekker',
@@ -77,6 +77,9 @@ const VM = new Vue({
           this.givenAnswer = answer;
           this.currentCorrectAnswer = this.questions[this.currentQuestion].correctAnswer;
           this.questionState++;
+        },
+        showScoreBoard: function() {
+
         },
       },
       template: '\
@@ -110,11 +113,15 @@ const VM = new Vue({
                   </button>\
                 </li>\
               </ol>\
-              <p>{{ givenAnswer }}</p>\
               <button \
                 v-if="currentQuestion < questions.length - 1"\
                 v-on:click="nextQ" class="button answer">\
                   volgende vraag\
+              </button>\
+              <button \
+                v-if="currentQuestion === questions.length - 1"\
+                v-on:click="showScoreBoard" class="button answer">\
+                  zie je score\
               </button>\
             </section>\
           </section>\
