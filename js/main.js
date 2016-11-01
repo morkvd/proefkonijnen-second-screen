@@ -43,6 +43,8 @@ var VM = new Vue({
           currentCorrectAnswer: null,
           givenAnswer: null,
           questionState: 0,
+          hasEnded: false,
+          totalPoints: 0,
           questions: [
             {
               question: 'Wat gaat er gebeuren?',
@@ -61,6 +63,33 @@ var VM = new Vue({
                 'B: Hij was te gevaarlijk',
                 'C: Ze waren het vergeten'
               ]
+            },
+            {
+              question: 'Gaat het Jan en Geraldine lukken om over het het kanaal te springen met een brom-mobiel?',
+              correctAnswer: 2,
+              answers: [
+                'A: Ja dat gaan ze gemakkelijk halen',
+                'B: Nee ze gaan zwemmen',
+                'C: Ja maar ze gaan keihard crashen'
+              ]
+            },
+            {
+              question: 'Wat gaat het beste helpen tegen de pijn?',
+              correctAnswer: 0,
+              answers: [
+                'A: Keihard schelden, FUCK',
+                'B: Heel veel chocolade eten',
+                'C: Lekker sporten'
+              ]
+            },
+            {
+              question: 'Gaat het Jan en Geraldine lukken om zelf een aardbeving te creeren?',
+              correctAnswer: 1,
+              answers: [
+                'A: Ja dit is verbazingwekkend gemakkelijk',
+                'B: Ja maar hij is zo klein dat je hem niet kunt meten',
+                'C: Nee dit kan natuurlijk niet'
+              ]
             }
           ],
         };
@@ -76,10 +105,13 @@ var VM = new Vue({
         giveAnswer: function(answer) {
           this.givenAnswer = answer;
           this.currentCorrectAnswer = this.questions[this.currentQuestion].correctAnswer;
+          if (this.givenAnswer === this.currentCorrectAnswer) {
+            this.totalPoints++;
+          }
           this.questionState++;
         },
         showScoreBoard: function() {
-
+          this.hasEnded = true;
         },
       },
       template: '\
@@ -88,9 +120,14 @@ var VM = new Vue({
             <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
             <p class="top-bar-text">Speel live mee</p>\
           </section>\
-          <section class="container">\
+          <section v-if="hasEnded" class="container">\
+            <h1 v-if="totalPoints === 1">Je hebt {{ totalPoints }} vraag goed beantwoord!</h1>\
+            <h1 v-else>Je hebt {{ totalPoints }} vragen goed beantwoord!</h1>\
+            <h2>van de 7820 thuisspelers sta jij de 1206de plek, goed gedaan</h2>\
+          </section>\
+          <section v-else class="container">\
             <section v-if="questionState === 0">\
-              <p>{{ questions[currentQuestion].question }}</p>\
+              <h1>{{ questions[currentQuestion].question }}</h1>\
               <ol class="answer-list-container">\
                 <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
                   <button class="button answer" v-on:click="giveAnswer(index)">{{ answer }}</button>\
