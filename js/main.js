@@ -40,6 +40,7 @@ const VM = new Vue({
       data: function() {
         return {
           currentQuestion: 0,
+          currentCorrectAnswer: null,
           givenAnswer: null,
           questionState: 0,
           questions: [
@@ -67,12 +68,15 @@ const VM = new Vue({
       methods: {
         navigate: emitNavigationEvent,
         nextQ: function() {
-          this.currentQuestion++;
           this.givenAnswer = null;
           this.questionState = 0;
+          this.currentCorrectAnswer = null;
+          this.currentQuestion++;
         },
-        giveAnswer: function() {
-          this.questionState++
+        giveAnswer: function(answer) {
+          this.givenAnswer = answer;
+          this.currentCorrectAnswer = this.questions[this.currentQuestion].correctAnswer;
+          this.questionState++;
         },
       },
       template: '\
@@ -86,7 +90,7 @@ const VM = new Vue({
               <p>{{ questions[currentQuestion].question }}</p>\
               <ol class="answer-list-container">\
                 <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
-                  <button class="button answer" v-on:click="giveAnswer">{{ answer }}</button>\
+                  <button class="button answer" v-on:click="giveAnswer(index)">{{ answer }}</button>\
                 </li>\
               </ol>\
             </section>\
@@ -94,9 +98,19 @@ const VM = new Vue({
               <p>{{ questions[currentQuestion].question }}</p>\
               <ol class="answer-list-container">\
                 <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
-                  <button class="button answer">{{ answer }}</button>\
+                  <button\
+                    class="button answer"\
+                    v-bind:class="{\
+                      chosen: (givenAnswer === index),\
+                      correct: (index === currentCorrectAnswer),\
+                      wrong: !(index === currentCorrectAnswer),\
+                    }"\
+                  >\
+                    {{ answer }}\
+                  </button>\
                 </li>\
               </ol>\
+              <p>{{ givenAnswer }}</p>\
               <button \
                 v-if="currentQuestion < questions.length - 1"\
                 v-on:click="nextQ" class="button answer">\
