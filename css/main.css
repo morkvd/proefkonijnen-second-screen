@@ -83,6 +83,8 @@ html, body, main {
   border: 3px black solid;
   background-color: #50e6b4;;
   color: black;
+  box-shadow: 1px 1px 2px 0px rgba(3, 3, 3, 0.5);
+  border-radius: 4px;
 
 }
 .button.main-menu {
@@ -105,4 +107,26 @@ html, body, main {
   font-size: 17px;
   font-weight: normal;
   text-align: left;
+  background-position: 95% center;
+  background-size: 28px;
+  background-repeat: no-repeat;
+}
+
+.button.answer.chosen {
+  background-color: #E65098;
+  color: white;
+  border-color: white;
+}
+
+.button.answer.correct {
+  background-image: url('../img/checked.svg'); /* image */
+}
+.button.answer.wrong {
+  background-image: url('../img/unchecked.svg');
+}
+.button.answer.chosen.correct {
+  background-image: url('../img/checked-white.svg');
+}
+.button.answer.chosen.wrong {
+  background-image: url('../img/unchecked-white.svg');
 }
