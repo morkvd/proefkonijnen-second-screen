@@ -28,7 +28,8 @@ var VM = new Vue({
           <section class="top-bar">\
             <p class="top-bar-text">proefkonijnen</p>\
           </section>\
-          <section class="container">\
+          <img class="main-menu-img" src="img/logo_proefkonijnen.png" />\
+          <section class="container offset">\
             <button v-on:click="navigate(\'live\')" class="button main-menu">Speel live mee</button>\
             <button v-on:click="navigate(\'diy\')" class="button main-menu">Doe het lekker zelf</button>\
             <button v-on:click="navigate(\'questions\')" class="button main-menu">Bezopen vragen</button>\
@@ -135,7 +136,7 @@ var VM = new Vue({
               </ol>\
             </section>\
             <section v-if="questionState === 1">\
-              <p>{{ questions[currentQuestion].question }}</p>\
+              <h1>{{ questions[currentQuestion].question }}</h1>\
               <ol class="answer-list-container">\
                 <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
                   <button\
@@ -173,9 +174,10 @@ var VM = new Vue({
         <section class="diy-container">\
           <section class="top-bar">\
             <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
-            <section class="container">\
-              <p class="top-bar-text">Doe het lekker zelf</p>\
-            </section>\
+            <p class="top-bar-text">Doe het lekker zelf</p>\
+          </section>\
+          <section class="container">\
+            <p class="top-bar-text">Doe het lekker zelf</p>\
           </section>\
         </section>',
     },
@@ -188,9 +190,10 @@ var VM = new Vue({
         <section class="questions-container">\
           <section class="top-bar">\
             <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
-            <section class="container">\
-              <p class="top-bar-text">Bezopen vragen</p>\
-            </section>\
+            <p class="top-bar-text">Bezopen vragen</p>\
+          </section>\
+          <section class="container">\
+            <p class="top-bar-text">Bezopen vragen</p>\
           </section>\
         </section>',
     },
