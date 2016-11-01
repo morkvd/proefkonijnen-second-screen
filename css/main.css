@@ -38,24 +38,49 @@ html, body, main {
   color: black;
 }
 
-.main-menu-button {
-  display: block;
-  width: 15em;
-  padding: 0.8em;
-  margin: 0 auto 2em;
 
-  font-family: 'Roboto Slab', serif;
-  font-size: 20px;
-  font-weight: bold;
-
-  border: 3px black solid;
-  background-color: #00FF6F;
-  color: black;
-}
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
 .fade-enter, .fade-leave-active {
   opacity: 0
+}
+
+.container {
+  padding: 2em;
+}
+
+.answer-list-container {
+  padding: 0;
+  margin: 0;
+}
+.answer-list {
+  list-style: none;
+}
+
+.button {
+  font-family: 'Roboto Slab', serif;
+  display: block;
+  border: 3px black solid;
+  background-color: #00FF6F;
+  color: black;
+
+}
+.button.main-menu {
+  width: 100%;
+  padding: 0.8em;
+  margin: 0 auto 2em;
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.button.answer {
+  width: 100%;
+  padding: 0.8em;
+  margin: 0 auto 1em;
+  font-family: 'Roboto Slab', serif;
+  font-size: 17px;
+  font-weight: normal;
+  text-align: left;
 }

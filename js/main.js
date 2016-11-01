@@ -7,7 +7,9 @@ const emitNavigationEvent = function (location) {
 const VM = new Vue({
   el: '#proefkonijnen',
   data: function () {
-    return { currentView: 'home' };
+    return {
+      currentView: 'home',
+    };
   },
 
   methods: {
@@ -21,32 +23,118 @@ const VM = new Vue({
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#main_menu_template',
+      template: '\
+        <section class="main-menu-container">\
+          <section class="top-bar">\
+            <p class="top-bar-text">proefkonijnen</p>\
+          </section>\
+          <section class="container">\
+            <button v-on:click="navigate(\'live\')" class="button main-menu">Speel live mee</button>\
+            <button v-on:click="navigate(\'diy\')" class="button main-menu">Doe het lekker zelf</button>\
+            <button v-on:click="navigate(\'questions\')" class="button main-menu">Bezopen vragen</button>\
+          </section>\
+        </section>'
     },
 
     live: {
-      data: {
-        index: 0,
-        questions: [],
+      data: function() {
+        return {
+          currentQuestion: 0,
+          givenAnswer: null,
+          questionState: 0,
+          questions: [
+            {
+              question: 'Wat gaat er gebeuren?',
+              correctAnswer: 2,
+              answers: [
+                'A: Het water begint te koken',
+                'B: Het water bevriest',
+                'C: Het water vliegt in de fik'
+              ]
+            },
+            {
+              question: 'Waarom duurde het 300 jaar voordat de reuze schildpad zijn wetenschappelijke naam kreeg?',
+              correctAnswer: 0,
+              answers: [
+                'A: Hij smaakte te lekker',
+                'B: Hij was te gevaarlijk',
+                'C: Ze waren het vergeten'
+              ]
+            }
+          ],
+        };
       },
       methods: {
         navigate: emitNavigationEvent,
+        nextQ: function() {
+          this.currentQuestion++;
+          this.givenAnswer = null;
+          this.questionState = 0;
+        },
+        giveAnswer: function() {
+          this.questionState++
+        },
       },
-      template: '#live_template',
+      template: '\
+        <section class="live-container">\
+          <section class="top-bar">\
+            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <p class="top-bar-text">Speel live mee</p>\
+          </section>\
+          <section class="container">\
+            <section v-if="questionState === 0">\
+              <p>{{ questions[currentQuestion].question }}</p>\
+              <ol class="answer-list-container">\
+                <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
+                  <button class="button answer" v-on:click="giveAnswer">{{ answer }}</button>\
+                </li>\
+              </ol>\
+            </section>\
+            <section v-if="questionState === 1">\
+              <p>{{ questions[currentQuestion].question }}</p>\
+              <ol class="answer-list-container">\
+                <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
+                  <button class="button answer">{{ answer }}</button>\
+                </li>\
+              </ol>\
+              <button \
+                v-if="currentQuestion < questions.length - 1"\
+                v-on:click="nextQ" class="button answer">\
+                  volgende vraag\
+              </button>\
+            </section>\
+          </section>\
+        </section>',
     },
 
     diy: {
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#diy_template',
+      template: '\
+        <section class="diy-container">\
+          <section class="top-bar">\
+            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <section class="container">\
+              <p class="top-bar-text">Doe het lekker zelf</p>\
+            </section>\
+          </section>\
+        </section>',
     },
 
     questions: {
       methods: {
         navigate: emitNavigationEvent,
       },
-      template: '#questions_template',
+      template: '\
+        <section class="questions-container">\
+          <section class="top-bar">\
+            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <section class="container">\
+              <p class="top-bar-text">Bezopen vragen</p>\
+            </section>\
+          </section>\
+        </section>',
     },
   }
 });

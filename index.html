@@ -7,49 +7,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
 </head>
 <body>
-
-  <!-- main menu component html template -->
-  <script type="text/x-template" id="main_menu_template">
-    <section class="main-menu-container">
-      <section class="top-bar">
-        <p class="top-bar-text">proefkonijnen</p>
-      </section>
-      <button v-on:click="navigate('live')" class="main-menu-button">Speel live mee</button>
-      <button v-on:click="navigate('diy')" class="main-menu-button">Doe het lekker zelf</button>
-      <button v-on:click="navigate('questions')" class="main-menu-button">Bezopen vragen</button>
-    </section>
-  </script>
-
-  <!-- live play component html template -->
-  <script type="text/x-template" id="live_template">
-    <section class="live-container">
-      <section class="top-bar">
-        <button v-on:click="navigate('home')" class="back-button">Terug</button>
-        <p class="top-bar-text">Speel live mee</p>
-      </section>
-    </section>
-  </script>
-
-  <!-- do it yourself component html template -->
-  <script type="text/x-template" id="diy_template">
-    <section class="diy-container">
-      <section class="top-bar">
-        <button v-on:click="navigate('home')" class="back-button">Terug</button>
-        <p class="top-bar-text">Doe het lekker zelf</p>
-      </section>
-    </section>
-  </script>
-
-  <!-- questions component html template -->
-  <script type="text/x-template" id="questions_template">
-    <section class="questions-container">
-      <section class="top-bar">
-        <button v-on:click="navigate('home')" class="back-button">Terug</button>
-        <p class="top-bar-text">Bezopen vragen</p>
-      </section>
-    </section>
-  </script>
-
   <!-- vue mount point changes the view when recieving 'navigate' events -->
   <main id="proefkonijnen">
     <component v-on:navigate="changeView" v-bind:is="currentView"></component>
