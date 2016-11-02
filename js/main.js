@@ -4,6 +4,25 @@ var emitNavigationEvent = function (location) {
   this.$emit('navigate', location);
 };
 
+Vue.component('todo-item', {
+  template: '\
+    <li>\
+      <button\
+        class="upvote-button"\
+        v-on:click="$emit(\'upvote\')"\
+        v-bind:class="{\
+          voted: voted,\
+        }"\
+      >\
+        <img class="upvote-icon" src="img/arrow-up.svg" />\
+      </button>\
+      {{ points }}\
+      {{ title }}\
+    </li>\
+  ',
+  props: ['title', 'points', 'voted']
+})
+
 var VM = new Vue({
   el: '#proefkonijnen',
   data: function () {
@@ -187,7 +206,40 @@ var VM = new Vue({
     },
 
     questions: {
+      data: function() {
+        return {
+          newTodoText: '',
+          todos: [
+            { points: 4, voted: false, text: 'Do the dishes' },
+            { points: 2, voted: false, text: 'Take out the trash' },
+            { points: 6, voted: false, text: 'Mow the lawn' },
+            { points: 4, voted: false, text: 'Do the dishes' },
+            { points: 2, voted: false, text: 'Take out the trash' },
+            { points: 5, voted: false, text: 'Mow the lawn' },
+            { points: 1, voted: false, text: 'Do the dishes' },
+            { points: 2, voted: false, text: 'Take out the trash' },
+            { points: 3, voted: false, text: 'Mow the lawn' },
+          ],
+        };
+      },
+      computed: {
+        sortedTodos: function() {
+          return this.todos.sort(function(a, b) {
+            return b.points - a.points;
+          });
+        },
+      },
       methods: {
+        addNewTodo: function() {
+          this.todos.push(this.newTodoText)
+          this.newTodoText = ''
+        },
+        upvote: function(i) {
+          if (!this.todos[i].voted) {
+            this.todos[i].points++;
+          }
+          this.todos[i].voted = true;
+        },
         navigate: emitNavigationEvent,
       },
       template: '\
@@ -199,7 +251,24 @@ var VM = new Vue({
             <p class="top-bar-text">Bezopen vragen</p>\
           </section>\
           <section class="container">\
-            <p class="top-bar-text">Bezopen vragen</p>\
+            <div id="todo-list-example">\
+              <input\
+                v-model="newTodoText"\
+                v-on:keyup.enter="addNewTodo"\
+                placeholder="Add a todo"\
+              >\
+              <ul class="question-list">\
+                <li\
+                  class="user-question"\
+                  is="todo-item"\
+                  v-for="(todo, index) in sortedTodos"\
+                  v-bind:title="todo.text"\
+                  v-bind:points="todo.points"\
+                  v-bind:voted="todo.voted"\
+                  v-on:upvote="upvote(index)"\
+                ></li>\
+              </ul>\
+            </div>\
           </section>\
         </section>',
     },

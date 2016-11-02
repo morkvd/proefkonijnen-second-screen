@@ -90,7 +90,7 @@ html, body, main {
   font-family: 'Roboto Slab', serif;
   display: block;
   border: 3px black solid;
-  background-color: #50e6b4;;
+  background-color: #50e6b4;
   color: black;
   box-shadow: 1px 1px 2px 0px rgba(3, 3, 3, 0.5);
   border-radius: 4px;
@@ -144,4 +144,32 @@ html, body, main {
 
 .button.next-question {
   margin-top: 2em;
+}
+
+.question-list {
+  padding: 0;
+  list-style: none;
+}
+
+.user-question {
+  margin-bottom: 1em;
+  position: relative;
+  padding: 0 0 0 2em;
+}
+
+.upvote-icon {
+  width: 1em;
+  height: 1em;
+}
+
+.upvote-button {
+  background: #50e6b4;
+  position: absolute;
+  left: 0;
+  border-radius: 6em;
+  padding: 3px 1px 0 0px;
+  border: black solid 1px;
+}
+.upvote-button.voted {
+  background: #e65098;
 }
