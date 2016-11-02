@@ -208,7 +208,8 @@ var VM = new Vue({
     questions: {
       data: function() {
         return {
-          newTodoText: '',
+          newQuestionText: '',
+          newQuestionEmail: '',
           todos: [
             { points: 203, voted: false, text: 'Kan je een bekertje water vullen op z\'n kop?' },
             { points: 203, voted: false, text: 'Kan je pijn stillen zonder pil?' },
@@ -230,9 +231,10 @@ var VM = new Vue({
         },
       },
       methods: {
-        addNewTodo: function() {
-          this.todos.push({ points: 1, voted: true, text: this.newTodoText });
-          this.newTodoText = '';
+        newQuestion: function() {
+          this.todos.push({ points: 1, voted: true, text: this.newQuestionText });
+          this.newQuestionText = '';
+          this.newQuestionEmail = '';
         },
         upvote: function(i) {
           if (!this.todos[i].voted) {
@@ -254,12 +256,28 @@ var VM = new Vue({
             <p class="top-bar-text">Bezopen vragen</p>\
           </section>\
           <section class="container">\
+            <h1 class="user-question-intro">\
+              Heb jij ook een bezopen vraag?\
+              Stel hem dan hier en wie weet wordt jouw vraag\
+              beantwoord in de uitzending\
+            </h1>\
+            <input\
+              class="user-question-input"\
+              v-model="newQuestionEmail"\
+              placeholder="Je e-mailadress"\
+            >\
+            <input\
+              class="user-question-input"\
+              v-model="newQuestionText"\
+              placeholder="Je vraag"\
+            >\
+            <button class="button answer center" v-on:click="newQuestion">stel je vraag</button>\
+          </section>\
+          <section class="container">\
             <div id="todo-list-example">\
-              <input\
-                v-model="newTodoText"\
-                v-on:keyup.enter="addNewTodo"\
-                placeholder="Add a todo"\
-              >\
+              <h1 class="user-question-intro">\
+                Of stem op vragen van andere kijkers\
+              </h1>\
               <ul class="question-list">\
                 <li\
                   class="user-question"\
