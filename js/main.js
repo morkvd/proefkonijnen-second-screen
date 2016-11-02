@@ -20,7 +20,39 @@ Vue.component('todo-item', {
       <span class="user-question-title">{{ title }}</span>\
     </li>\
   ',
-  props: ['title', 'points', 'voted']
+  props: ['title', 'points', 'voted'],
+});
+
+Vue.component('diy-story', {
+  template: '\
+    <li>\
+      <h1 class="diy-story-title"> {{ title }} </h1>\
+      <img class="diy-story-thumb" :src="thumb" />\
+      <transition name="fade">\
+        <div v-if="expanded">\
+          <h2 class="diy-story-sub-title">Benodigdheden</h2>\
+          <ul>\
+            <li\
+              class="diy-story-sub-title"\
+              v-for="requirement in requirements"\
+            >\
+              {{ requirement }}\
+            </li>\
+          </ul>\
+          <img class="diy-story-img" :src="img"/>\
+          <h2 class="diy-story-sub-title">instructies</h2>\
+          <p class="diy-story-instructons">{{ instructions }}</p>\
+        </div>\
+      </transition>\
+      <button\
+        class="diy-story-expand-button"\
+        v-on:click="$emit(\'expand\')"\
+      >\
+        {{ expanded ? "minder info" : "meer info"  }}\
+      </button>\
+    </li>\
+  ',
+  props: ['title', 'thumb', 'requirements', 'img', 'instructions', 'expanded'],
 })
 
 var VM = new Vue({
@@ -188,8 +220,83 @@ var VM = new Vue({
     },
 
     diy: {
+      data: function() {
+        return {
+          experiments: [
+            {
+              expanded: false,
+              title: 'Doe dit vooral thuis: magneet',
+              requirements: [
+               'Verfroerstaafje',
+               'IJzerdraad',
+               'Magneetjes',
+               'Kleine batterijtjes',
+              ],
+              instructions:
+                'Maak aan beide uiteinden van het roerstaafje een gaatje waar, \
+                in een kleine boog, het ijzerdraad door heen kan. Buig het ijzerdraad, zoals \
+                hierboven, aan het einde waar hij door het gaatje is gekomen om zodat hij stevig \
+                blijft zitten. Hou de magneten aan de onderkant van het hout. Leg de batterij \
+                boven op de magneet maar wel met het hout ertussen en voer het uit zoals \
+                Geraldine hierboven voordoet!',
+              img: 'img/exp1.gif',
+              thumb: 'img/exp1.png',
+            },
+            {
+              expanded: false,
+              title: 'Doe dit vooral thuis: Haarlak-kanon',
+              requirements: [
+                'Haarlak',
+                'Lege frisdrankfles (met klein gaat aan de onderkant)',
+                'Keukenrol zonder papier (dus een keukenrolrol)',
+                'Tape',
+                'Lange aansteker',
+                'Pingpongballetje',
+              ],
+              instructions:
+                'Ja, je zult misschien denken: "Wow, die lijkt op het sinaasappelkanon?!" Klopt. \
+                Maar deze is next level 2.0. Dikke ontsteker, gewoon die automatische knalmachine \
+                dus. Maar laten we klein beginnen. Tape de keukenrol vast aan de bovenkant van de \
+                fles. Tape het zo vast dat er geen luchtopeningen zijn en er geen lucht kan \
+                ontsnappen. Doe vervolgens de pingpongbal in de koker en laat hem naar beneden \
+                rollen tegen de rand van de opening van de fles. Mik van je af en richt absoluut \
+                nooit op mensen, dieren of planten. Spuit een beetje haarlak in het gat onder de \
+                fles en hou direct de aansteker erbij, ontvlam het vuur en PANG!',
+              img: 'img/exp2.png',
+              thumb: 'img/exp2b.png',
+            },
+            {
+              expanded: false,
+              title: 'Doe dit vooral thuis: Rijstfles',
+              requirements: [
+                'Leeg flesje (500ml)',
+                'Rijst (sushirijst het liefst)',
+                'Eetstokje',
+                'Trechter',
+              ],
+              instructions:
+                'Doe rijst soepel via een trechter in het flesje tot net boven het etiket. \
+                Laat eerst zien door soepel de rijst in het flesje te duwen dat je hem daarna weer \
+                kunt verwijderen. Vervolgens haal je het stokje eruit en stamp je met de bodem van \
+                de fles tegen de tafel zodat de rijst zo ver mogelijk naar beneden zakt. Vervolgens \
+                druk je opnieuw in een rechte lijn naar beneden het stokje stevig in de rijst, tot \
+                het stokje niet meer verder kan. Als het goed is kun je via het stokje nu de hele \
+                les optillen!',
+              img: 'img/exp3b.jpg',
+              thumb: 'img/exp3.png',
+            },
+          ],
+        };
+      },
       methods: {
         navigate: emitNavigationEvent,
+        expand: function(i) {
+          if (this.experiments[i].expanded) {
+            this.experiments[i].expanded = false;
+          } else {
+            this.experiments[i].expanded = true;
+          }
+        },
       },
       template: '\
         <section class="diy-container">\
@@ -200,7 +307,18 @@ var VM = new Vue({
             <p class="top-bar-text">Doe het lekker zelf</p>\
           </section>\
           <section class="container">\
-            <p class="top-bar-text">Doe het lekker zelf</p>\
+            <li\
+              class="diy-story"\
+              is="diy-story"\
+              v-for="(experiment, index) in experiments"\
+              v-bind:title="experiment.title"\
+              v-bind:thumb="experiment.thumb"\
+              v-bind:requirements="experiment.requirements"\
+              v-bind:img="experiment.img"\
+              v-bind:instructions="experiment.instructions"\
+              v-bind:expanded="experiment.expanded"\
+              v-on:expand="expand(index)"\
+            ></li>\
           </section>\
         </section>',
     },

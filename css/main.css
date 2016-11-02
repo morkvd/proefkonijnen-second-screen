@@ -208,3 +208,46 @@ html {
 .upvote-button.voted {
   background: #e65098;
 }
+
+.diy-story {
+  list-style: none;
+}
+
+.diy-story-expand-button {
+  width: 100%;
+  padding: 0.3em 0;
+  margin: 0 0 3em 0;
+  border: 0;
+  background-color: #CCC183;
+  border-bottom: 1px solid #7e7545;
+}
+
+.diy-story-title {
+  margin: 0 0 1em 0;
+}
+
+.diy-story-thumb {
+  width: 100%;
+  margin: 0 0 1em 0;
+}
+
+.diy-story-sub-title {
+  margin: 0 0 1em 0;
+}
+
+.diy-story-img {
+  width: 100%;
+  margin: 0 0 1em 0;
+}
+
+.diy-story-instructions {
+  margin: 0 0 1em 0;
+}
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
