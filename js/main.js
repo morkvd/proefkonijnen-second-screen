@@ -118,7 +118,9 @@ var VM = new Vue({
       template: '\
         <section class="live-container">\
           <section class="top-bar">\
-            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <button v-on:click="navigate(\'home\')" class="back-button">\
+              <img src="img/previous.svg"/>\
+            </button>\
             <p class="top-bar-text">Speel live mee</p>\
           </section>\
           <section v-if="hasEnded" class="container">\
@@ -153,7 +155,7 @@ var VM = new Vue({
               </ol>\
               <button \
                 v-if="currentQuestion < questions.length - 1"\
-                v-on:click="nextQ" class="button answer">\
+                v-on:click="nextQ" class="button answer next-question">\
                   volgende vraag\
               </button>\
               <button \
@@ -173,7 +175,9 @@ var VM = new Vue({
       template: '\
         <section class="diy-container">\
           <section class="top-bar">\
-            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <button v-on:click="navigate(\'home\')" class="back-button">\
+              <img src="img/previous.svg"/>\
+            </button>\
             <p class="top-bar-text">Doe het lekker zelf</p>\
           </section>\
           <section class="container">\
@@ -189,7 +193,9 @@ var VM = new Vue({
       template: '\
         <section class="questions-container">\
           <section class="top-bar">\
-            <button v-on:click="navigate(\'home\')" class="back-button">Terug</button>\
+            <button v-on:click="navigate(\'home\')" class="back-button">\
+              <img src="img/previous.svg"/>\
+            </button>\
             <p class="top-bar-text">Bezopen vragen</p>\
           </section>\
           <section class="container">\
