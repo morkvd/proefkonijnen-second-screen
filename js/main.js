@@ -16,8 +16,8 @@ Vue.component('todo-item', {
       >\
         <img class="upvote-icon" src="img/arrow-up.svg" />\
       </button>\
-      {{ points }}\
-      {{ title }}\
+      <span class="user-question-point">{{ points }}.</span>\
+      <span class="user-question-title">{{ title }}</span>\
     </li>\
   ',
   props: ['title', 'points', 'voted']
@@ -210,15 +210,15 @@ var VM = new Vue({
         return {
           newTodoText: '',
           todos: [
-            { points: 4, voted: false, text: 'Do the dishes' },
-            { points: 2, voted: false, text: 'Take out the trash' },
-            { points: 6, voted: false, text: 'Mow the lawn' },
-            { points: 4, voted: false, text: 'Do the dishes' },
-            { points: 2, voted: false, text: 'Take out the trash' },
-            { points: 5, voted: false, text: 'Mow the lawn' },
-            { points: 1, voted: false, text: 'Do the dishes' },
-            { points: 2, voted: false, text: 'Take out the trash' },
-            { points: 3, voted: false, text: 'Mow the lawn' },
+            { points: 203, voted: false, text: 'Kan je een bekertje water vullen op z\'n kop?' },
+            { points: 203, voted: false, text: 'Kan je pijn stillen zonder pil?' },
+            { points: 174, voted: false, text: 'Kun je duiken zonder luchttank?' },
+            { points: 140, voted: false, text: 'Kun je koken op het gas uit je eigen scheet?' },
+            { points: 134, voted: false, text: 'Kun je een blackout verslaan als je weet dat hij komt?' },
+            { points: 90, voted: false, text: 'Kun je met een bierfiets de Cauberg beklimmen?' },
+            { points: 59, voted: false, text: 'Kun je over een rijdende auto heen rennen? ' },
+            { points: 8, voted: false, text: 'Kun je je hersenen als afstandsbediening gebruiken?' },
+            { points: 3, voted: false, text: 'Kun je bloedworst maken van je eigen bloed?' },
           ],
         };
       },
@@ -231,14 +231,17 @@ var VM = new Vue({
       },
       methods: {
         addNewTodo: function() {
-          this.todos.push(this.newTodoText)
-          this.newTodoText = ''
+          this.todos.push({ points: 1, voted: true, text: this.newTodoText });
+          this.newTodoText = '';
         },
         upvote: function(i) {
           if (!this.todos[i].voted) {
             this.todos[i].points++;
+            this.todos[i].voted = true;
+          } else {
+            this.todos[i].points--;
+            this.todos[i].voted = false;
           }
-          this.todos[i].voted = true;
         },
         navigate: emitNavigationEvent,
       },

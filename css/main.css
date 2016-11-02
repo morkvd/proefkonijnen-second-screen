@@ -154,7 +154,18 @@ html, body, main {
 .user-question {
   margin-bottom: 1em;
   position: relative;
-  padding: 0 0 0 2em;
+  padding: 0 0 0 4em;
+}
+.user-question-point {
+  position: absolute;
+  left: 0;
+  text-align: right;
+  width: 60px;
+  font-weight: bold;
+}
+
+.user-question-title {
+
 }
 
 .upvote-icon {
@@ -165,10 +176,12 @@ html, body, main {
 .upvote-button {
   background: #50e6b4;
   position: absolute;
-  left: 0;
+  left: 0px;
   border-radius: 6em;
-  padding: 3px 1px 0 0px;
+  padding: 3px 1px 0 1px;
   border: black solid 1px;
+  top: 1px;
+  z-index: 9999;
 }
 .upvote-button.voted {
   background: #e65098;
