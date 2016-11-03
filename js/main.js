@@ -170,18 +170,18 @@ var VM = new Vue({
         <section class="live-container">\
           <section class="top-bar">\
             <button v-on:click="navigate(\'home\')" class="back-button">\
-              <img src="img/previous.svg"/>\
+              <img class="back-button-icon" src="img/previous.svg"/>\
             </button>\
             <p class="top-bar-text">Speel live mee</p>\
           </section>\
           <section v-if="hasEnded" class="container">\
-            <h1 v-if="totalPoints === 1">Je hebt {{ totalPoints }} vraag goed beantwoord!</h1>\
-            <h1 v-else>Je hebt {{ totalPoints }} vragen goed beantwoord!</h1>\
-            <h2>van de 7820 thuisspelers sta jij de 1206de plek, goed gedaan</h2>\
+            <h1 class="end-result" v-if="totalPoints === 1">Je hebt {{ totalPoints }} vraag goed beantwoord!</h1>\
+            <h1 class="end-result" v-else>Je hebt {{ totalPoints }} vragen goed beantwoord!</h1>\
+            <h2 class="end-result">van de 7820 thuisspelers sta jij de 1206de plek, goed gedaan</h2>\
           </section>\
           <section v-else class="container">\
             <section v-if="questionState === 0">\
-              <h1>{{ questions[currentQuestion].question }}</h1>\
+              <h1 class="question">{{ questions[currentQuestion].question }}</h1>\
               <ol class="answer-list-container">\
                 <li class="answer-list" v-for="(answer, index) in questions[currentQuestion].answers">\
                   <button class="button answer" v-on:click="giveAnswer(index)">{{ answer }}</button>\
@@ -240,7 +240,7 @@ var VM = new Vue({
                 boven op de magneet maar wel met het hout ertussen en voer het uit zoals \
                 Geraldine hierboven voordoet!',
               img: 'img/exp1.gif',
-              thumb: 'img/exp1.png',
+              thumb: 'img/exp1.jpg',
             },
             {
               expanded: false,
@@ -262,8 +262,8 @@ var VM = new Vue({
                 rollen tegen de rand van de opening van de fles. Mik van je af en richt absoluut \
                 nooit op mensen, dieren of planten. Spuit een beetje haarlak in het gat onder de \
                 fles en hou direct de aansteker erbij, ontvlam het vuur en PANG!',
-              img: 'img/exp2.png',
-              thumb: 'img/exp2b.png',
+              img: 'img/exp2.jpg',
+              thumb: 'img/exp2b.jpg',
             },
             {
               expanded: false,
@@ -283,7 +283,7 @@ var VM = new Vue({
                 het stokje niet meer verder kan. Als het goed is kun je via het stokje nu de hele \
                 les optillen!',
               img: 'img/exp3b.jpg',
-              thumb: 'img/exp3.png',
+              thumb: 'img/exp3.jpg',
             },
           ],
         };
@@ -302,7 +302,7 @@ var VM = new Vue({
         <section class="diy-container">\
           <section class="top-bar">\
             <button v-on:click="navigate(\'home\')" class="back-button">\
-              <img src="img/previous.svg"/>\
+              <img class="back-button-icon" src="img/previous.svg"/>\
             </button>\
             <p class="top-bar-text">Doe het lekker zelf</p>\
           </section>\
@@ -369,7 +369,7 @@ var VM = new Vue({
         <section class="questions-container">\
           <section class="top-bar">\
             <button v-on:click="navigate(\'home\')" class="back-button">\
-              <img src="img/previous.svg"/>\
+              <img class="back-button-icon" src="img/previous.svg"/>\
             </button>\
             <p class="top-bar-text">Bezopen vragen</p>\
           </section>\
