@@ -134,6 +134,14 @@ html {
   margin: 0 auto;
 }
 
+.button.main-menu.wait {
+    font-size: 19px;
+    background-color: #9bf2d5;
+    border: 3px solid #626262;
+    color: #626262;
+    padding: 2.2px 0.8em;
+}
+
 .button.answer {
   width: 100%;
   padding: 0.8em;
@@ -242,8 +250,11 @@ html {
   padding: 0.3em 0;
   margin: 0;
   border: 0;
-  background-color: #CCC183;
+  background-color: transparent;
   border-bottom: 1px solid #7e7545;
+  font-family: roboto slab;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .diy-story-title {
@@ -277,6 +288,8 @@ html {
   height: 1150px;
 }
 .fade-enter, .fade-leave-active {
+  transition: opacity .2s;
+  transition: height .2s;
   opacity: 0;
   height: 0;
 }

@@ -71,6 +71,11 @@ var VM = new Vue({
 
   components: {
     home: {
+      data: function() {
+        return {
+          isLive: false,
+        };
+      },
       methods: {
         navigate: emitNavigationEvent,
       },
@@ -81,7 +86,8 @@ var VM = new Vue({
           </section>\
           <img class="main-menu-img" src="img/logo_proefkonijnen.png" />\
           <section class="container offset">\
-            <button v-on:click="navigate(\'live\')" class="button main-menu">Speel live mee</button>\
+            <button v-if="!isLive" v-on:click="isLive = true" class="button main-menu wait">Uitzending start over 10 minuten</button>\
+            <button v-if="isLive" v-on:click="navigate(\'live\')" class="button main-menu">Speel live mee</button>\
             <button v-on:click="navigate(\'diy\')" class="button main-menu">Doe het lekker zelf</button>\
             <button v-on:click="navigate(\'questions\')" class="button main-menu">Bezopen vragen</button>\
           </section>\
