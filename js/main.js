@@ -86,7 +86,7 @@ var VM = new Vue({
           </section>\
           <img class="main-menu-img" src="img/logo_proefkonijnen.png" />\
           <section class="container offset">\
-            <button v-if="!isLive" v-on:click="isLive = true" class="button main-menu wait">Uitzending start over 10 minuten</button>\
+            <button v-if="!isLive" v-on:click="isLive = true" class="button main-menu wait">Uitzending start over<br/> 10 minuten</button>\
             <button v-if="isLive" v-on:click="navigate(\'live\')" class="button main-menu">Speel live mee</button>\
             <button v-on:click="navigate(\'diy\')" class="button main-menu">Doe het lekker zelf</button>\
             <button v-on:click="navigate(\'questions\')" class="button main-menu">Bezopen vragen</button>\
@@ -103,6 +103,7 @@ var VM = new Vue({
           questionState: 0,
           hasEnded: false,
           totalPoints: 0,
+          QisLive: false,
           questions: [
             {
               question: 'Wat gaat er gebeuren?',
@@ -159,6 +160,7 @@ var VM = new Vue({
           this.questionState = 0;
           this.currentCorrectAnswer = null;
           this.currentQuestion++;
+          this.QisLive = false;
         },
         giveAnswer: function(answer) {
           this.givenAnswer = answer;
@@ -184,6 +186,9 @@ var VM = new Vue({
             <h1 class="end-result" v-if="totalPoints === 1">Je hebt {{ totalPoints }} vraag goed beantwoord!</h1>\
             <h1 class="end-result" v-else>Je hebt {{ totalPoints }} vragen goed beantwoord!</h1>\
             <h2 class="end-result">van de 7820 thuisspelers sta jij de 1206de plek, goed gedaan</h2>\
+            <button v-on:click="navigate(\'home\')" class="button answer">\
+                Terug naar het menu\
+            </button>\
           </section>\
           <section v-else class="container">\
             <section v-if="questionState === 0">\
@@ -211,7 +216,12 @@ var VM = new Vue({
                 </li>\
               </ol>\
               <button \
-                v-if="currentQuestion < questions.length - 1"\
+                v-if="currentQuestion < questions.length - 1 && !QisLive"\
+                v-on:click="QisLive = true" class="button answer next-question wait">\
+                  volgende vraag opent over 5 min\
+              </button>\
+              <button \
+                v-if="currentQuestion < questions.length - 1 && QisLive"\
                 v-on:click="nextQ" class="button answer next-question">\
                   volgende vraag\
               </button>\
